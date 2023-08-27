@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,41 +25,41 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.grey[850],
             foregroundColor: Colors.white,
           )),
-      home: myHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class myHomePage extends StatefulWidget {
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
-  State<myHomePage> createState() => _myHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _myHomePageState extends State<myHomePage> {
+class _MyHomePageState extends State<MyHomePage> {
   String title = "";
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
-    title =
-        ["What's in my Fridge", "Saved Items"][_ThebottomBarState._currentPage];
+    title = ["What's in my Fridge", "Saved Items"][_ThebottomBarState._currentPage];
     super.setState(fn);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      onDrawerChanged: setState(() => title = [
-            "What's in my Fridge",
-            "Saved Items"
-          ][_ThebottomBarState._currentPage]),
       appBar: AppBar(
-        title: Text(title),
-        //  style: TextStyle(color: Colors.white)),
-        // backgroundColor: Colors.deepPurple,
-      ),
+          title: const Text(
+        "What's in my Fridge",
+      )
+          //  style: TextStyle(color: Colors.white)),
+          // backgroundColor: Colors.deepPurple,
+
+          ),
       // body: NewPage(), <-------- This has caused a duplicate button behind
       //                        the bottom nav bar
-      bottomSheet: ThebottomBar(),
+      bottomSheet: const ThebottomBar(),
     );
   }
 }
@@ -95,8 +94,8 @@ class _ThebottomBarState extends State<ThebottomBar> {
         }),
       ),
       body: [
-        NewPage(),
-        SavedItemsPage(),
+        const NewPage(),
+        const SavedItemsPage(),
       ][_currentPage],
     );
   }
@@ -115,11 +114,12 @@ class NewPage extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const AddNewItem()),
           );
         },
+
         icon: Icon(
           Icons.add,
           color: Colors.blueGrey[300],
         ),
-        label: Text(
+        label: const Text(
           "Add New Item",
           style: TextStyle(color: Colors.white),
         ),
@@ -141,6 +141,7 @@ class _SavedItemsPageState extends State<SavedItemsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 3.0),
+      
       child: Scaffold(
         // appBar: AppBar(title: Text("Saved Items")),
         body: LayoutBuilder(builder: (context, constraints) {
@@ -192,21 +193,22 @@ class _AddNewItemState extends State<AddNewItem> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            "Back",
-            style: TextStyle(fontStyle: FontStyle.italic),
-          ),
-        ),
+            title: const Text(
+              "Back",
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ), 
         body: const Padding(
-          padding: EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0),
           child: Column(
-            children: <Widget>[
-              TextField(
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Enter food name"),
-              ),
-            ],
+              children: <Widget>[
+          
+          TextField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), hintText: "Enter food name"),
           ),
+              ],
+            ),
         ));
   }
 }
